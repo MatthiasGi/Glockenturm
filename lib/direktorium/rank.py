@@ -2,6 +2,7 @@ from enum import Enum
 
 
 class Rank(Enum):
+    """Kodierung des Rangs eines Tages."""
 
     NONE = 0
     NICHTGEBOTEN = 1
@@ -11,6 +12,7 @@ class Rank(Enum):
 
     @staticmethod
     def parse(rank: str) -> 'Rank':
+        """Interpretiert den Rang aus der API."""
         if rank == 'H': return Rank.HOCHFEST
         if rank == 'F': return Rank.FEST
         if rank == 'G': return Rank.GEBOTEN

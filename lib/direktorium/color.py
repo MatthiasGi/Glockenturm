@@ -2,6 +2,7 @@ import enum
 
 
 class Color(enum.Enum):
+    """Kodierung einer liturgischen Farbe."""
 
     NONE = enum.auto()
     WHITE = enum.auto()
@@ -11,6 +12,7 @@ class Color(enum.Enum):
 
     @staticmethod
     def parse(color: str) -> 'Color':
+        """Interpretiert die liturgische Farbe aus der API."""
         if color == 'w': return Color.WHITE
         if color == 'r': return Color.RED
         if color == 'g': return Color.GREEN

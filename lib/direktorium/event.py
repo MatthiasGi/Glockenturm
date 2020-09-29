@@ -7,6 +7,7 @@ from .rank import Rank
 
 @dataclass
 class Event:
+    """Klasse, die Informationen über ein Fest sammelt und zusammenfasst."""
 
     title: str
     date: date
@@ -20,7 +21,8 @@ class Event:
     rank: Rank = Rank.NONE
 
     @staticmethod
-    def parse(data) -> 'Event':
+    def parse(data: dict) -> 'Event':
+        """Interpretiert ein Fest aus der API."""
         return Event(
             title=data['Tl'],
             date=date.fromisoformat(data['Datum']),

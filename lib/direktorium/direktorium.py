@@ -10,11 +10,24 @@ from .event import Event
 
 @dataclass
 class Direktorium:
+    """
+    Stellt das Direktorium mit einem Cache und einem Regionalkalender zur
+    Verfügung.
+
+    Attributes
+    ----------
+    kalender : str
+        Kalenderbezeichnung nach
+        https://www.eucharistiefeier.de/lk/api-abfrage.php.
+    cache_dir : str
+        Verzeichnis, in dem Ergebnisse zwischengespeichert werden sollen.
+    """
 
     kalender: str = 'deutschland'
     cache_dir: str = None
 
     def get(self, d: date) -> List[Event]:
+        """Gibt eine List von Events für ein angegebenes Datum zurück."""
         r = self.request_cache(d)
         entries = [Event.parse(e) for e in r.json()['Zelebrationen'].values()]
         entries.sort(key=lambda e: e.importance)
@@ -23,6 +36,10 @@ class Direktorium:
     def request_api(
         self, year: int, month: int = None, day: int = None
     ) -> requests.models.Response:
+        """
+        Fragt die API online direkt ab, optional können Monat und Tag angegeben
+        werden.
+        """
         url = 'http://www.eucharistiefeier.de/lk/api.php?format=json&' \
               f'info=wdtrgflu&dup=e&bahn=j&kal={self.kalender}&jahr={year}&'
         if month: url += f'monat={month}&'
@@ -30,6 +47,11 @@ class Direktorium:
         return requests.get(url)
 
     def request_cache(self, d: date) -> dict:
+        """
+        Erstellt das API-Format aus dem Cache. Falls benötigt wird dazu der
+        Cache angelegt. Sollte kein Cache vorgesehen sein, wird direkt die
+        Online-API abgefragt.
+        """
         if self.cache_dir is None:
             return self.request_api(d.year, d.month, d.day)
 
