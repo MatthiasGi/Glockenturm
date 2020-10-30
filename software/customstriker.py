@@ -31,6 +31,8 @@ class CustomStriker(Striker):
 
     Attributes
     ----------
+    active : bool
+        Kann gesetzt werden, um weitere Schläge zu muten.
     carillon : Carillon
         Carillon, auf dem geschlagen werden soll.
     direktorium : TodayDirektorium
@@ -66,6 +68,7 @@ class CustomStriker(Striker):
     def __init__(self, carillon: Carillon, direktorium: TodayDirektorium):
         """Erstellt das Objekt und übernimmt Carillon und Direktorium."""
         super().__init__()
+        self.active = True
         self.carillon = carillon
         self.direktorium = direktorium
 
@@ -105,16 +108,16 @@ class CustomStriker(Striker):
         for i in range(quarters):
             events = self.direktorium.get()
             if events and events[0].rank >= Rank.GEBOTEN:
-                self.carillon.hit(CustomStriker.ENGEL)
+                if self.active: self.carillon.hit(CustomStriker.ENGEL)
                 time.sleep(0.5)
-                self.carillon.hit(CustomStriker.BERNHARD)
+                if self.active: self.carillon.hit(CustomStriker.BERNHARD)
                 time.sleep(0.5)
-                self.carillon.hit(CustomStriker.APOSTEL)
+                if self.active: self.carillon.hit(CustomStriker.APOSTEL)
                 time.sleep(1.5)
             else:
-                self.carillon.hit(CustomStriker.ENGEL)
+                if self.active: self.carillon.hit(CustomStriker.ENGEL)
                 time.sleep(2)
 
         for i in range(hours):
-            self.carillon.hit(CustomStriker.TRINITATIS)
+            if self.active: self.carillon.hit(CustomStriker.TRINITATIS)
             time.sleep(2.5)
