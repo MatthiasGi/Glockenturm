@@ -1,7 +1,7 @@
-from enum import Enum
+from enum import IntEnum
 
 
-class Rank(Enum):
+class Rank(IntEnum):
     """Kodierung des Rangs eines Tages."""
 
     NONE = 0

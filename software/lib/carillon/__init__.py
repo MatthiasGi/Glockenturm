@@ -4,6 +4,6 @@ zusammenfasst.
 """
 
 from .carillon import Carillon
-from .quarterclock import QuarterClock, QuarterClockObserver
+from .striker import Striker
 
-__all__ = ['Carillon', 'QuarterClock', 'QuarterClockObserver', ]
+__all__ = ['Carillon', 'Striker', ]

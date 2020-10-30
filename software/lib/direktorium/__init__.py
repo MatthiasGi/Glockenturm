@@ -8,5 +8,8 @@ from .color import Color
 from .direktorium import Direktorium
 from .event import Event
 from .rank import Rank
+from .season import Season
+from .todaydirektorium import TodayDirektorium
 
-__all__ = ['Color', 'Direktorium', 'Rank', 'Event', ]
+__all__ = ['Color', 'Direktorium', 'Rank', 'Event', 'Season',
+           'TodayDirektorium', ]
