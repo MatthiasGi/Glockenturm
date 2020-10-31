@@ -41,7 +41,7 @@ class Carillon:
             self.port.send(mido.Message('note_on', note=note))
             self.port.send(mido.Message('note_off', note=note))
 
-    def play(self, *messages) -> None:
+    def play(self, messages) -> None:
         """
         Spielt eine übergebene Melodie auf dem Carillon.
 
