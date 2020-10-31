@@ -10,7 +10,7 @@ if __name__ == '__main__':
     carillon = Carillon()
     direktorium = TodayDirektorium()
 
-    CustomStriker(carillon, direktorium)
+    striker = CustomStriker(carillon, direktorium)
 
     while True:
         time.sleep(1)
