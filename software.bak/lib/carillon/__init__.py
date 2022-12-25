@@ -4,8 +4,6 @@ zusammenfasst.
 """
 
 from .carillon import Carillon
-from .carillonstriker import CarillonStriker
-from .song import Song
 from .striker import Striker
 
-__all__ = ['Carillon', 'CarillonStriker', 'Song', 'Striker', ]
+__all__ = ['Carillon', 'Striker', ]

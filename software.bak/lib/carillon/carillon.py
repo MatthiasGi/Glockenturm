@@ -1,10 +1,11 @@
+from dataclasses import dataclass
 import mido
-import mido.backends.rtmidi
 import time
 from typing import List
 import warnings
 
 
+@dataclass
 class Carillon:
     """
     Klasse, die die Kommunikation zu GrandOrgue über MIDI-Messages abstrahiert
@@ -19,21 +20,11 @@ class Carillon:
     -------
     hit(note)
         Schlägt eine Glocke an.
-    play(messages)
+    play(*messages)
         Spielt eine Melodie auf dem Carillon.
     """
 
-    def __init__(self, port: mido.backends.rtmidi.Output = None):
-        """
-        Erzeugt das Carillon und belegt es mit einem MIDI-Port vor.
-
-        Paramteres
-        ----------
-        port : mido.backends.rtmidi.Output (optional)
-            MIDI-Port, der genutzt werden soll. Sofern keiner übergeben wird,
-            wird ein Standardport geöffnet.
-        """
-        self.port = mido.open_output() if port is None else port
+    port: mido.backends.rtmidi.Output = mido.open_output()
 
     def hit(self, note: int) -> None:
         """
@@ -46,7 +37,7 @@ class Carillon:
             MIDI-Notenwert der anzuschlagenden Glocke.
         """
         if note < 34 or note > 89:
-            warnings.warn(f'Note {note} nicht verfügbar.')
+            warnings.warn(f'Note {note} nicht durch das Carillon abgebildet!')
         else:
             self.port.send(mido.Message('note_on', note=note))
             self.port.send(mido.Message('note_off', note=note))
